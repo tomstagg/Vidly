@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
+import Movies from "./components/movie";
 
 function App() {
   return (
     <main className="Container">
-      <h1>Hello World</h1>
+      <Movies />
     </main>
   );
 }

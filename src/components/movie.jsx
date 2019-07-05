@@ -4,31 +4,21 @@ import { getMovies, deleteMovie } from "../services/fakeMovieService";
 class Movie extends Component {
   state = { movies: getMovies() };
 
-  handleDelete = id => {
-    deleteMovie(id);
-    this.setState({ movies: getMovies() });
+  handleDelete = movie => {
+    const moviesWithoutDeleted = this.state.movies.filter(
+      m => m._id !== movie._id
+    );
+    // deleteMovie(id);
+    this.setState({ movies: moviesWithoutDeleted });
   };
 
   render() {
-    return this.state.movies == 0 ? (
-      <h4>There are no movies in the database</h4>
-    ) : (
-      this.renderIfMoviesFound()
-    );
-  }
+    const { length: movieCount } = this.state.movies;
+    if (movieCount === 0) return <p>There are no movies in the database</p>;
 
-  renderSummary() {
-    return this.state.movies.length == 1 ? (
-      <h4>Showing {this.state.movies.length} movie in the database</h4>
-    ) : (
-      <h4>Showing {this.state.movies.length} movies in the datebase</h4>
-    );
-  }
-
-  renderIfMoviesFound() {
     return (
       <React.Fragment>
-        {this.renderSummary()}
+        <p>Showing {movieCount} movies in the datebase</p>
         <table className="table">
           <thead>
             <tr>
@@ -36,6 +26,7 @@ class Movie extends Component {
               <th scope="col">Genre</th>
               <th scope="col">Stock</th>
               <th scope="col">Rate</th>
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -47,9 +38,8 @@ class Movie extends Component {
                 <td>{movie.dailyRentalRate}</td>
                 <td>
                   <button
-                    onClick={() => this.handleDelete(movie._id)}
-                    type="button"
-                    className="btn btn-danger"
+                    className="btn btn-danger btn-small"
+                    onClick={() => this.handleDelete(movie)}
                   >
                     Delete
                   </button>

@@ -58,7 +58,6 @@ class Movie extends Component {
             ))}
           </tbody>
         </table>
-        table.tom>thead>tbody>tr*4
       </React.Fragment>
     );
   }

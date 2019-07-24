@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 const ListGroup = props => {
   const {
@@ -8,6 +8,7 @@ const ListGroup = props => {
     onItemSelect,
     selectedItem
   } = props;
+
   return (
     <ul className="list-group">
       {items.map(item => (
